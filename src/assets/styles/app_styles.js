@@ -15,6 +15,10 @@ export const AppStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'red',
   },
+  normal_text_style: {
+    textAlign: 'right',
+    color: 'black',
+  },
 });
 
 export default AppStyles;

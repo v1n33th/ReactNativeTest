@@ -1,10 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import {useSelector} from 'react-redux';
 
-import AppStyles from '../assets/styles/app_styles';
+import HomeScreenLayout from '../components/layout/HomeScreenLayout';
 
 function HomeScreen({navigation}) {
-  return <View style={AppStyles.common_background} />;
+  const users = useSelector((state) => state.user.users);
+  return <HomeScreenLayout users={users} />;
 }
 
 export default HomeScreen;
