@@ -16,6 +16,7 @@ function LoginTextInput(props) {
   const onTextChange = (enteredText) => {
     const errorMessage = isValidString(enteredText);
     props.loginState.isValid = !errorMessage;
+    props.loginState.enteredText = enteredText;
     setErrorState(!errorMessage);
     setErrorMessageState(errorMessage);
   };

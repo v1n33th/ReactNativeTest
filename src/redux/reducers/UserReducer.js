@@ -1,4 +1,6 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import {combineReducers} from '@reduxjs/toolkit';
+import {persistReducer} from 'redux-persist';
 import LoginState from '../../models/LoginState';
 
 const {
@@ -10,12 +12,18 @@ const {
 } = require('../../assets/constants/redux/actions');
 const {getInitialUsers} = require('../../services/LoginScreenServices');
 
-function userReducer(state = getInitialUsers(), action) {
+function userReducer(state = [], action) {
   if (action.type === GET_USERS) {
     return state;
   }
   return state;
 }
+
+const loginPersistConfig = {
+  key: 'loginState',
+  storage: AsyncStorage,
+  blacklist: ['passWord'],
+};
 
 function loginReducer(state = new LoginState(), action) {
   if (action.type === LOGIN_USER) {
@@ -44,7 +52,7 @@ function loginReducer(state = new LoginState(), action) {
 
 const userReducers = combineReducers({
   users: userReducer,
-  loginState: loginReducer,
+  loginState: persistReducer(loginPersistConfig, loginReducer),
 });
 
 export default userReducers;

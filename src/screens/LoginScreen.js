@@ -10,8 +10,14 @@ import {createTwoButtonAlert} from '../services/utils/DisplayUtils';
 function LoginScreen({navigation}) {
   const dispatch = useDispatch();
   const onCLick = () => {
-    const loginState = new LoginState('Test', 'Yesy');
+    const loginState = new LoginState(
+      loginScreenLayoutState.loginTextInputState.enteredText,
+      'testpass',
+    );
     dispatch(loginUser(loginState));
+  };
+  const navigateToHome = () => {
+    navigation.navigate('Home');
   };
 
   const [loginScreenLayoutState, setLoginState] = useState(
@@ -26,13 +32,18 @@ function LoginScreen({navigation}) {
   }
 
   if (loginState.isSuccess) {
-    navigation.navigate('Home');
+    //navigation.navigate('Home');
   } else if (loginState.isSuccess === false) {
     console.log('Login Error');
     loginState.isSuccess = false;
   }
 
-  return <LoginScreenLayout layoutState={loginScreenLayoutState} />;
+  return (
+    <LoginScreenLayout
+      layoutState={loginScreenLayoutState}
+      navigateToHome={navigateToHome}
+    />
+  );
 }
 
 export default LoginScreen;

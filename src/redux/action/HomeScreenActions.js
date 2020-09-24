@@ -1,4 +1,5 @@
 import {
+  ADD_DONE_TASK,
   GET_USERS,
   LOGGING_IN,
   LOGIN_ERROR,
@@ -16,6 +17,9 @@ export function loginUser(loginState) {
   return {
     type: LOGIN_USER,
     payLoad: loginState,
+    meta: {
+      retry: true,
+    },
   };
 }
 
@@ -36,5 +40,12 @@ export function loginError(errorMessage = 'Error Occured') {
 export function logginIn() {
   return {
     type: LOGGING_IN,
+  };
+}
+
+export function addActionAsDone(action) {
+  return {
+    type: ADD_DONE_TASK,
+    payLoad: action,
   };
 }
